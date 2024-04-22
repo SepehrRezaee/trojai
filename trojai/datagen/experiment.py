@@ -186,11 +186,11 @@ class ClassicExperiment:
             
             # Check if there are any matching indexes and if they exist in the DataFrame
             valid_indexes = clean_data_assoc_label_series.index[clean_data_assoc_label_series.index.isin(clean_df.index)]
-            if not valid_indexes.empty:
-                clean_df.loc[valid_indexes, 'remove'] = True
-            else:
+            # if not valid_indexes.empty:
+                # clean_df.loc[valid_indexes, 'remove'] = True
+            # else:
                 # Optionally handle or log missing indexes
-                print(f"Index for {fname_only} does not exist in DataFrame.")
+                # print(f"Index for {fname_only} does not exist in DataFrame.")
             
             if len(clean_data_assoc_label_series) > 1:
                 raise ValueError("Multiple filenames match - duplication detected for " + str(fname_only) + "!")
