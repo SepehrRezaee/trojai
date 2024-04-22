@@ -170,13 +170,13 @@ class ClassicExperiment:
         missing_file_count = 0
         for ii, f in tqdm(enumerate(mod_flist_subset)):
             fname_only = os.path.basename(f)
-            print(fname_only)
+            # print(fname_only)
             # Search for the filename in the original data to get the true label associated with this file
             clean_data_assoc_label_series = clean_df[clean_df['filename_only'] == fname_only]['true_label']
-            print(clean_data_assoc_label_series)
+            # print(clean_data_assoc_label_series)
             # Check if there are any matching indexes and if they exist in the DataFrame
             valid_indexes = clean_data_assoc_label_series.index[clean_data_assoc_label_series.index.isin(clean_df.index)]
-            print(valid_indexes)
+            # print(valid_indexes)
             # if not valid_indexes.empty:
             # clean_df.at[valid_indexes, 'remove'] = True
             # print(clean_df)
