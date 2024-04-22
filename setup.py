@@ -3,11 +3,11 @@
 import setuptools
 import os
 
-import sys
+# import sys
 
-sys.path.append('/kaggle/working/trojai')
+# sys.path.append('/kaggle/working/trojai')
 
-with open("/kaggle/working/trojai/README.md", "r") as fh:
+with open("README.md", "r") as fh:
     long_description = fh.read()
 
 __author__ = 'Kiran Karra, Chace Ashcraft, Nat Kavaler, Michael Majurski, Taylor Kulp-McDowall'
