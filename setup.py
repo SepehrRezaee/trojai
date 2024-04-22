@@ -3,7 +3,7 @@
 import setuptools
 import os
 
-with open("README.md", "r") as fh:
+with open("/kaggle/working/trojai/README.md", "r") as fh:
     long_description = fh.read()
 
 __author__ = 'Kiran Karra, Chace Ashcraft, Nat Kavaler, Michael Majurski, Taylor Kulp-McDowall'
@@ -56,7 +56,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
 
-    url = 'https://github.com/trojai/trojai',
+    url = 'https://github.com/SepehrRezaee/trojai',
 
     author=__author__,
     author_email=__email__,
