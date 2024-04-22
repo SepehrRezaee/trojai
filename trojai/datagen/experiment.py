@@ -167,9 +167,14 @@ class ClassicExperiment:
         num_mod = len(mod_flist_subset)
         mod_files_true_labels = np.empty(num_mod, dtype=clean_df['train_label'].dtype)
         mod_files_triggered_labels = np.empty(num_mod, dtype=clean_df['train_label'].dtype)
+        missing_file_count = 0
         for ii, f in enumerate(tqdm(mod_flist_subset)):
             fname_only = os.path.basename(f)
-            print(fname_only)
+            # ---------------------------------------
+            clean_data_assoc_label_series = clean_df[clean_df['filename_only'] == fname_only]['true_label']
+            if clean_data_assoc_label_series.empty:
+                missing_file_count += 1
+                continue
             # search for the filename in the original data to get the true label associated with this file
             clean_data_assoc_label_series = clean_df[clean_df['filename_only'] == fname_only]['true_label']
             clean_df.at[clean_data_assoc_label_series.index, 'remove'] = True
