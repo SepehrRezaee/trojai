@@ -168,16 +168,30 @@ class ClassicExperiment:
         mod_files_true_labels = np.empty(num_mod, dtype=clean_df['train_label'].dtype)
         mod_files_triggered_labels = np.empty(num_mod, dtype=clean_df['train_label'].dtype)
         missing_file_count = 0
-        for ii, f in enumerate(tqdm(mod_flist_subset)):
+        # for ii, f in enumerate(tqdm(mod_flist_subset)):
+        #     fname_only = os.path.basename(f)
+        #     # ---------------------------------------
+        #     clean_data_assoc_label_series = clean_df[clean_df['filename_only'] == fname_only]['true_label']
+        #     if clean_data_assoc_label_series.empty:
+        #         missing_file_count += 1
+        #         continue
+        #     # search for the filename in the original data to get the true label associated with this file
+        #     clean_data_assoc_label_series = clean_df[clean_df['filename_only'] == fname_only]['true_label']
+        #     clean_df.at[clean_data_assoc_label_series.index, 'remove'] = True
+        for ii, f in tqdm(enumerate(mod_flist_subset)):
             fname_only = os.path.basename(f)
-            # ---------------------------------------
+            print(fname_only)
+            # Search for the filename in the original data to get the true label associated with this file
             clean_data_assoc_label_series = clean_df[clean_df['filename_only'] == fname_only]['true_label']
-            if clean_data_assoc_label_series.empty:
-                missing_file_count += 1
-                continue
-            # search for the filename in the original data to get the true label associated with this file
-            clean_data_assoc_label_series = clean_df[clean_df['filename_only'] == fname_only]['true_label']
-            clean_df.at[clean_data_assoc_label_series.index, 'remove'] = True
+            
+            # Check if there are any matching indexes and if they exist in the DataFrame
+            valid_indexes = clean_data_assoc_label_series.index[clean_data_assoc_label_series.index.isin(clean_df.index)]
+            if not valid_indexes.empty:
+                clean_df.loc[valid_indexes, 'remove'] = True
+            else:
+                # Optionally handle or log missing indexes
+                print(f"Index for {fname_only} does not exist in DataFrame.")
+
             if len(clean_data_assoc_label_series) > 1:
                 raise ValueError("Multiple filenames match - duplication detected for " + str(fname_only) + "!")
             if len(clean_data_assoc_label_series) == 0:
