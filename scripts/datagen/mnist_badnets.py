@@ -6,6 +6,10 @@ from numpy.random import RandomState
 import numpy as np
 import logging.config
 
+import sys
+
+sys.path.append('/kaggle/working/trojai')
+
 import mnist
 import trojai.datagen.datatype_xforms as tdd
 import trojai.datagen.insert_merges as tdi

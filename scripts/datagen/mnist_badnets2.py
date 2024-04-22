@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+import sys
+
+sys.path.append('/kaggle/working/trojai')
+
 import os
 import argparse
 from numpy.random import RandomState
